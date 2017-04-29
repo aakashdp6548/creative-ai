@@ -24,7 +24,7 @@ def returnDictionary(D):
     >>> returnDictionary(coleridge) == {'in': 'xanadu', 'did': 'kubla khan'}
     True
     """
-    pass
+    return D
 
 def keyInDict(D, K):
     """
@@ -39,7 +39,10 @@ def keyInDict(D, K):
     >>> keyInDict(coleridge, 'decree')
     False
     """
-    pass
+    if K in D:
+        return True
+
+    return False
 
 def returnKeyVal(D, K):
     """
@@ -52,7 +55,7 @@ def returnKeyVal(D, K):
     >>> returnKeyVal(coleridge, 'decree')
     {}
     """
-    pass
+    return D[K]
 
 def setKeyVal(D, K, V):
     """
@@ -65,7 +68,8 @@ def setKeyVal(D, K, V):
     >>> setKeyVal({'through': 'caverns'}, 'measureless', 'to man') == {'through': 'caverns', 'measureless': 'to man'}
     True
     """
-    pass
+    D[K] = V
+    return D
 
 def setKeyValList(D, K, V1, V2, V3, V4):
     """
@@ -77,7 +81,8 @@ def setKeyValList(D, K, V1, V2, V3, V4):
     >>> setKeyValList({}, 'down', 'to', 'a', 'sunless', 'sea') == {'down': ['to', 'a', 'sunless', 'sea']}
     True
     """
-    pass
+    D[K] = [V1, V2, V3, V4]
+    return D
 
 def asciiAssociate():
     """
@@ -90,7 +95,11 @@ def asciiAssociate():
     >>> asciiAssociate() == {'a': 97, 'b': 98, 'c': 99, 'd': 100, 'e': 101, 'f': 102, 'g': 103, 'h': 104, 'i': 105, 'j': 106, 'k': 107, 'l': 108, 'm': 109, 'n': 110, 'o': 111, 'p': 112, 'q': 113, 'r': 114, 's': 115, 't': 116, 'u': 117, 'v': 118, 'w': 119, 'x': 120, 'y': 121, 'z': 122}
     True
     """
-    pass
+    asciiDict = {}
+    for letter in alphabet:
+        asciiDict[letter] = ord(letter)
+
+    return asciiDict
 
 def getColor(favoriteColors, name):
     """
@@ -105,7 +114,7 @@ def getColor(favoriteColors, name):
     >>> getColor({'Coleridge': ['green']}, 'Coleridge')
     'green'
     """
-    pass
+    return favoriteColors[name][0]
 
 def translate(vocab, word, language):
     """
@@ -121,7 +130,7 @@ def translate(vocab, word, language):
     >>> translate({'river': {'Spanish': 'rio', 'French': 'riviere'}}, 'river', 'French')
     'riviere'
     """
-    pass
+    return vocab[word][language]
 
 def nestedDictionary():
     """
@@ -133,7 +142,11 @@ def nestedDictionary():
     >>> nestedDictionary() == {'a': {}, 'b': {}, 'c': {}, 'd': {}, 'e': {}, 'f': {}, 'g': {}, 'h': {}, 'i': {}, 'j': {}, 'k': {}, 'l': {}, 'm': {}, 'n': {}, 'o': {}, 'p': {}, 'q': {}, 'r': {}, 's': {}, 't': {}, 'u': {}, 'v': {}, 'w': {}, 'x': {}, 'y': {}, 'z': {}}
     True
     """
-    pass
+    D = {}
+    for letter in alphabet:
+        D[letter] = {}
+
+    return D
 
 def nestedDictionary3D(L1, L2):
     """
@@ -148,7 +161,12 @@ def nestedDictionary3D(L1, L2):
     >>> nestedDictionary3D(['dolphin', 'panda'], ['diet', 'habitat']) == {'dolphin': {'diet': {}, 'habitat': {}}, 'panda': {'diet': {}, 'habitat': {}}}
     True
     """
-    pass
+    D = {}
+    for l1_element in L1:
+        for l2_element in L2:
+            D[l1_element][l2_element] = {}
+
+    return D
 
 def valueFrom3D(D, K1, K2, K3):
     """
@@ -162,7 +180,7 @@ def valueFrom3D(D, K1, K2, K3):
     >>> valueFrom3D({'singing': {'of': {'mount': 'abora'}}}, 'singing', 'of', 'mount')
     'abora'
     """
-    pass
+    return D[K1][K2][K3]
 
 def keysIn2D(D, L1, L2):
     """
@@ -177,7 +195,11 @@ def keysIn2D(D, L1, L2):
     >>> keysIn2D({'xanadu': 'kubla khan'}, ['in', 'xanadu'], ['did', 'kubla khan'])
     True
     """
-    pass
+    if L1[-1] in D:
+        if D[L1[-1]] == L2[-1]:
+            return True
+
+    return False
 
 ###############################################################################
 # Main
