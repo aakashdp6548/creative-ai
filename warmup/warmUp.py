@@ -163,6 +163,7 @@ def nestedDictionary3D(L1, L2):
     """
     D = {}
     for l1_element in L1:
+        D[l1_element] = {}
         for l2_element in L2:
             D[l1_element][l2_element] = {}
 

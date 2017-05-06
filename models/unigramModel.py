@@ -1,5 +1,6 @@
 import random
 from nGramModel import *
+import os
 
 class UnigramModel(NGramModel):
 
@@ -28,7 +29,18 @@ class UnigramModel(NGramModel):
                   symbols to be included as their own tokens in
                   self.nGramCounts. For more details, see the spec.
         """
-        pass
+        # adds special characters to lines
+        text = self.prepData(text);
+        for line in text:
+            for word in line:
+                # for unigrams we ignore these characters
+                if (word != '^::^' and word != '^:::^'):
+                    # if the word has not been encountered before, make a new entry in dictionary
+                    if word not in self.nGramCounts:
+                        self.nGramCounts[word] = 1
+                    # if it has been encountered, just add 1 to the count
+                    else:
+                        self.nGramCounts[word] += 1;
 
     def trainingDataHasNGram(self, sentence):
         """
@@ -57,6 +69,18 @@ class UnigramModel(NGramModel):
 
 if __name__ == '__main__':
     # Add your test cases here
-    text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
-    sentence = [ 'brown' ]
-    unigramModel = UnigramModel()
+    # text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
+    # sentence = [ 'brown' ]
+
+    text = []
+    # this doesn't always work it depends on the directory you're in when running the code idk lol
+    dir = os.path.dirname(__file__)
+    file = open(dir + '/../data/lyrics/the_beatles/hey_jude.txt', 'r')
+    for line in file:
+        line = line.strip().split()
+        if line != "":
+            text.append(line)
+
+    unigramModel = UnigramModel() # make new Unigram object
+    unigramModel.trainModel(text) # train model with text list
+    print unigramModel.nGramCounts
