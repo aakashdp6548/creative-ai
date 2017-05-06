@@ -50,7 +50,11 @@ class UnigramModel(NGramModel):
                   the next token for the sentence. For explanations of how this
                   is determined for the UnigramModel, see the spec.
         """
-        pass
+        # function should return true if self.nGramCounts is not empty
+        if len(self.nGramCounts) > 0:
+            return True
+
+        return False
 
     def getCandidateDictionary(self, sentence):
         """
@@ -69,18 +73,19 @@ class UnigramModel(NGramModel):
 
 if __name__ == '__main__':
     # Add your test cases here
-    # text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
-    # sentence = [ 'brown' ]
+    text = [ ['the', 'quick', 'brown', 'fox'], ['the', 'lazy', 'dog'] ]
+    sentence = [ 'brown' ]
 
-    text = []
+    song = []
     # this doesn't always work it depends on the directory you're in when running the code idk lol
     dir = os.path.dirname(__file__)
-    file = open(dir + '/../data/lyrics/the_beatles/hey_jude.txt', 'r')
+    file = open(dir + '/../data/lyrics/the_beatles/let_it_be.txt', 'r')
     for line in file:
         line = line.strip().split()
         if line != "":
-            text.append(line)
+            song.append(line)
 
     unigramModel = UnigramModel() # make new Unigram object
-    unigramModel.trainModel(text) # train model with text list
+    unigramModel.trainModel(song) # train model with text list
     print unigramModel.nGramCounts
+    print unigramModel.trainingDataHasNGram(sentence)
